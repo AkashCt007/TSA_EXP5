@@ -1,5 +1,5 @@
 # Ex.No: 05  IMPLEMENTATION OF TIME SERIES ANALYSIS AND DECOMPOSITION
-### Date: 
+### Date: 27/9/2025
 
 
 ### AIM:
@@ -13,6 +13,43 @@ To Illustrates how to perform time series analysis and decomposition on the mont
 5. Display the overall results.
 
 ### PROGRAM:
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+data = pd.read_csv('IMDB Top 250 Movies (1).csv',parse_dates=['year'],index_col='year')
+
+decomposition = seasonal_decompose(data['rating'], model='additive',period=12)
+
+plt.figure(figsize=(10, 12)) # Adjust the figure size for a square shape
+plt.show()
+
+# Original Data
+plt.subplot(411)
+plt.plot(data['rating'])
+plt.legend(loc='upper left')
+plt.title('Monthly Passengers')
+# Trend Plot
+plt.subplot(412)
+plt.plot(decomposition.trend, label='Trend', color='orange')
+plt.legend(loc='upper left')
+plt.title('Linear Trend Plot')
+# Seasonal Plot
+plt.subplot(413)
+plt.plot(decomposition.seasonal, label='Seasonal', color='green')
+plt.legend(loc='upper left')
+plt.title('Seasonality Plot')
+# Residual Plot
+plt.subplot(414)
+plt.plot(decomposition.resid, label='Residual', color='red')
+plt.legend(loc='upper left')
+plt.title('Residual Plot')
+plt.tight_layout()
+plt.show()
+
+```
 
 
 
@@ -45,6 +82,7 @@ TREND PLOT REPRESENTATION :
 
 OVERAL REPRESENTATION:
 
+<img width="1087" height="610" alt="image" src="https://github.com/user-attachments/assets/dd928e2b-f713-4983-9804-0d0bcae8adb8" />
 
 
 ### RESULT:
